@@ -1,5 +1,5 @@
-# Compila EscalaNotas para macOS (universal) e iOS en un Mac de GitHub (sin firma: para probar; firmar requiere cuenta de Apple).
-name: EscalaNotas Apple
+# Compila ReglaDe3 para macOS (universal) e iOS en un Mac de GitHub (sin firma: para probar; firmar requiere cuenta de Apple).
+name: ReglaDe3 Apple
 on: [workflow_dispatch, push]
 jobs:
   compilar:
@@ -11,8 +11,8 @@ jobs:
         with: { xcode-version: latest-stable }
       - run: brew install xcodegen
       - run: ./preparar-web.sh && xcodegen generate
-      - run: xcodebuild -project EscalaNotas.xcodeproj -scheme EscalaNotas-macOS -configuration Release -destination 'generic/platform=macOS' CODE_SIGNING_ALLOWED=NO build SYMROOT=$PWD/build
-      - run: xcodebuild -project EscalaNotas.xcodeproj -scheme EscalaNotas-iOS -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build SYMROOT=$PWD/build
-      - run: lipo -info "build/Release/EscalaNotas.app/Contents/MacOS/EscalaNotas"
+      - run: xcodebuild -project ReglaDe3.xcodeproj -scheme ReglaDe3-macOS -configuration Release -destination 'generic/platform=macOS' CODE_SIGNING_ALLOWED=NO build SYMROOT=$PWD/build
+      - run: xcodebuild -project ReglaDe3.xcodeproj -scheme ReglaDe3-iOS -configuration Release -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build SYMROOT=$PWD/build
+      - run: lipo -info "build/Release/ReglaDe3.app/Contents/MacOS/ReglaDe3"
       - uses: actions/upload-artifact@v4
-        with: { name: EscalaNotas-apple, path: "apple/build/Release*/*.app" }
+        with: { name: ReglaDe3-apple, path: "apple/build/Release*/*.app" }
