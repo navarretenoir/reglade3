@@ -15,7 +15,8 @@
 | ✔ Sin internet · sin cuentas · sin publicidad | Offline · no accounts · no ads |
 
 ## Plataformas / Platforms
-Linux (RPM, DEB, AppImage, Flatpak, Snap) · Windows 10/11 (instalador y Microsoft Store) · Android 4.0+ · macOS e iOS/iPadOS (proyecto XcodeGen).
+Linux (RPM, DEB, AppImage, Flatpak, Snap) · Windows 10/11 (instalador y Microsoft Store) · Android 4.0+ · macOS e iOS/iPadOS (proyecto XcodeGen) ·
+**Sistemas antiguos** (núcleo en C89 con Open Watcom, en `nucleo/`): MS-DOS, Windows 3.x, Windows 95/98/Me, NT 3.5/3.51/4.0, 2000, XP, Vista, 7 y 8, y OS/2 Warp (`REGLA3-*.EXE` en las *releases*).
 Las descargas están en las *releases*. Downloads are in the releases.
 
 ## Desarrollo / Development

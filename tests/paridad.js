@@ -1,0 +1,13 @@
+const R = require("../ui/js/regla3.js"), q = R.leer, f = (x, d = 2) => x.formato(d).replace(/−/g, "-");
+const L = [];
+const m = (e, x) => L.push(e + "=" + f(x));
+m("directa 3 2400 5", R.directa(q("3"), q("2400"), q("5")).valor); m("inversa 4 12 6", R.inversa(q("4"), q("12"), q("6")).valor);
+m("directa 7 100 3", R.directa(q("7"), q("100"), q("3")).valor); m("inversa 7 100 3", R.inversa(q("7"), q("100"), q("3")).valor);
+m("compuesta dir", R.compuesta(q("600"), [{ a: q("5"), c: q("8"), tipo: "directa" }, { a: q("6"), c: q("10"), tipo: "directa" }]).valor);
+m("compuesta inv", R.compuesta(q("12"), [{ a: q("6"), c: q("4"), tipo: "inversa" }, { a: q("8"), c: q("6"), tipo: "inversa" }]).valor);
+m("pct de 15 80", R.porcentajeDe(q("15"), q("80")).valor); m("pct que 30 120", R.queEs(q("30"), q("120")).valor);
+m("baja 20000 25", R.variacion(q("20000"), q("25"), -1).valor); m("sube 50 20", R.variacion(q("50"), q("20"), 1).valor);
+m("original 40000 20 baja", R.original(q("40000"), q("20"), -1).valor); m("iva neto 10000", R.iva(q("10000"), true).valor); m("iva bruto 11900", R.iva(q("11900"), false).valor);
+L.push("directa a=0 ok=0");
+["1.234,56", "12,5", "1.234", "1234.5", "3/4", "-7", "abc", "1,2,3", "0,1", "10.000", "2,5/0,5"].forEach(s => { const v = q(s); L.push("leer(" + s + ")=" + (v ? f(v, 4) : "NULO")); });
+console.log(L.join("\n"));
