@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Regla de 3 para Android antiguo (1.6 en adelante): interfaz nativa, sin WebView, sin permisos. Desarrollada por Javiera Navarrete. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="io.github.navarretenoir.regla3.antiguo" android:versionCode="1" android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="36" />
+    <application android:label="Regla de 3" android:icon="@drawable/ic_launcher" android:allowBackup="false">
+        <activity android:name=".Principal" android:exported="true" android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

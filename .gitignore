@@ -9,3 +9,11 @@ herramientas/webview2
 herramientas/linux-pkg/runtime-x86_64
 # binarios compilados (se generan con make)
 desktop/regla-de-3
+# piezas de terceros que se bajan aparte
+herramientas/j2me/*.jar
+herramientas/j2me/proguard-7.6.1
+herramientas/j2me/bc-j2me-src
+symbian/build
+symbian/dist
+android-antiguo/build
+android-antiguo/dist
