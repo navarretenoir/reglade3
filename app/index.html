@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es" data-tema="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Regla de Tres</title>
+<link rel="icon" href="icono.svg">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <img class="mk" src="icono.svg" alt="" width="44" height="44">
+  <div><h1>Regla de tres</h1><p>Directa, inversa, compuesta y porcentajes, con el paso a paso.</p></div>
+  <span class="sp"></span>
+  <button class="ib" id="b-aj" aria-label="Ajustes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M4.6 7.5l1.9 1.1M17.5 15.4l1.9 1.1M4.6 16.5l1.9-1.1M17.5 8.6l1.9-1.1"/></svg></button>
+ </header>
+ <div class="seg" id="modos" role="group" aria-label="Tipo de regla de tres"><i class="th"></i>
+  <button data-m="directa" aria-pressed="true">Directa</button><button data-m="inversa" aria-pressed="false">Inversa</button><button data-m="compuesta" aria-pressed="false">Compuesta</button><button data-m="pct" aria-pressed="false">Porcentajes</button>
+ </div>
+ <div class="cols">
+  <div><div class="card" id="form"></div></div>
+  <div><div class="card" id="resultado"></div><div class="card" id="historial"></div></div>
+ </div>
+</div>
+<dialog id="dlg-aj"><div class="b"><h3>Ajustes</h3>
+ <div class="row"><span>Decimales</span><select id="aj-dec"><option>0</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>6</option></select></div>
+ <div class="row"><span>Apariencia</span><select id="aj-tema"><option value="auto">Automática</option><option value="claro">Clara</option><option value="oscuro">Oscura</option></select></div>
+ <div class="row"><span>Mostrar ceros finales</span><select id="aj-ceros"><option value="0">No</option><option value="1">Sí</option></select></div>
+ <p style="color:var(--mut);font-size:13px;margin:14px 0 4px">Todo se calcula en tu dispositivo, sin internet. El historial queda guardado solo aquí.</p>
+ <div style="text-align:right;margin-top:10px"><button class="btn p" id="aj-ok">Listo</button></div></div></dialog>
+<div class="toast" id="toast"></div>
+<script src="js/dispositivo.js"></script>
+<script src="js/regla3.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

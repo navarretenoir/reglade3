@@ -1,0 +1,21 @@
+const R = require("../app/js/regla3.js"), assert = require("assert"); let n = 0;
+function t(nombre, f) { try { f(); n++; console.log("✔", nombre); } catch (e) { console.log("✗", nombre, "→", e.message); process.exitCode = 1; } }
+const q = R.leer, F = (x, d = 6) => x.formato(d);
+t("lectura chilena", () => { assert.equal(F(q("1.234,56")), "1.234,56"); assert.equal(F(q("12,5")), "12,5"); assert.equal(F(q("1.234")), "1.234"); assert.equal(F(q("1234.5")), "1.234,5"); assert.equal(F(q("3/4")), "0,75"); assert.equal(F(q("-7")), "−7"); assert.equal(q("abc"), null); assert.equal(q("1,2,3"), null); assert.equal(q(""), null); });
+t("directa: 3→12, 5→x = 20", () => assert.equal(F(R.directa(q("3"), q("12"), q("5")).valor), "20"));
+t("directa decimal exacto (sin error de coma flotante)", () => assert.equal(F(R.directa(q("0,1"), q("0,3"), q("0,7")).valor), "2,1"));
+t("directa 1/3 exacto", () => { const r = R.directa(q("3"), q("1"), q("1")).valor; assert.equal(r.fraccion(), "1/3"); assert.equal(F(r, 4), "0,3333"); });
+t("inversa: 4 obreros 12 días, 6 obreros → 8 días", () => assert.equal(F(R.inversa(q("4"), q("12"), q("6")).valor), "8"));
+t("compuesta: 5 máq. 6 h → 600 u; 8 máq. 10 h → 1600", () => assert.equal(F(R.compuesta(q("600"), [{ a: q("5"), c: q("8"), tipo: "directa" }, { a: q("6"), c: q("10"), tipo: "directa" }]).valor), "1.600"));
+t("compuesta con inversa: 6 obreros, 8 h, 12 días → 4 obreros, 6 h", () => assert.equal(F(R.compuesta(q("12"), [{ a: q("6"), c: q("4"), tipo: "inversa" }, { a: q("8"), c: q("6"), tipo: "inversa" }]).valor), "24"));
+t("porcentaje de: 15% de 80 = 12", () => assert.equal(F(R.porcentajeDe(q("15"), q("80")).valor), "12"));
+t("¿qué % es 30 de 120? 25", () => assert.equal(F(R.queEs(q("30"), q("120")).valor), "25"));
+t("aumento 20% a 50 = 60; descuento 20% = 40", () => { assert.equal(F(R.variacion(q("50"), q("20"), 1).valor), "60"); assert.equal(F(R.variacion(q("50"), q("20"), -1).valor), "40"); });
+t("original tras descuento: 40 tras −20% = 50", () => assert.equal(F(R.original(q("40"), q("20"), -1).valor), "50"));
+t("IVA: 10.000 neto → 11.900; 11.900 bruto → 10.000", () => { assert.equal(F(R.iva(q("10000"), true).valor), "11.900"); assert.equal(F(R.iva(q("11900"), false).valor), "10.000"); });
+t("IVA impuesto de 10.000 = 1.900", () => assert.equal(F(R.iva(q("10000"), true).impuesto), "1.900"));
+t("división por cero rechazada", () => { assert.throws(() => R.directa(q("0"), q("1"), q("1"))); assert.throws(() => R.inversa(q("1"), q("1"), q("0"))); assert.throws(() => R.original(q("1"), q("100"), -1)); });
+t("redondeo mitad lejos de cero", () => { assert.equal(F(q("2,675"), 2), "2,68"); assert.equal(F(q("-2,675"), 2), "−2,68"); assert.equal(F(q("0,005"), 2), "0,01"); assert.equal(F(q("0,004"), 2), "0"); });
+t("pasos en español presentes", () => { const r = R.directa(q("3"), q("12"), q("5")); assert(r.pasos.length >= 5 && /Resultado: x = 20/.test(r.pasos[r.pasos.length - 1])); });
+t("números grandes sin pérdida", () => assert.equal(F(R.directa(q("1"), q("123456789012345678"), q("1000")).valor), "123.456.789.012.345.678.000"));
+console.log(n + " pruebas OK" + (process.exitCode ? " — HAY FALLOS" : ""));
