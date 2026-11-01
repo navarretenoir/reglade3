@@ -1,0 +1,11 @@
+build/
+dist/
+.gradle/
+local.properties
+*.apk
+*.bak*
+apple/Recursos/web/
+herramientas/webview2
+herramientas/linux-pkg/runtime-x86_64
+# binarios compilados (se generan con make)
+desktop/regla-de-3

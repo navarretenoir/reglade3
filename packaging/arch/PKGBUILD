@@ -1,0 +1,28 @@
+# Maintainer: Javiera Navarrete <navarrete.noir@gmail.com>
+pkgname=regla-de-3
+pkgver=1.0
+pkgrel=1
+pkgdesc="Regla de tres fácil, con el paso a paso, para todos"
+arch=('x86_64')
+url="https://github.com/navarretenoir/regla3"
+license=('GPL-3.0-or-later')
+depends=('gtk4' 'webkitgtk-6.0')
+makedepends=('gcc' 'make' 'pkgconf')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/navarretenoir/regla3/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')   # actualizar con updpkgsums
+
+build() {
+  cd "regla3-$pkgver"
+  make -C desktop UI_DIR=/usr/share/regla-de-3/ui EXTRA_CFLAGS="$CFLAGS $LDFLAGS"
+}
+
+package() {
+  cd "regla3-$pkgver"
+  local D="$pkgdir"
+  install -Dm755 desktop/regla-de-3 "$D/usr/bin/regla-de-3"
+  install -d "$D/usr/share/regla-de-3"; cp -r ui "$D/usr/share/regla-de-3/"; rm -f "$D/usr/share/regla-de-3/ui/"*.bak*
+  install -Dm644 linux/io.github.navarretenoir.ReglaDe3.desktop "$D/usr/share/applications/io.github.navarretenoir.ReglaDe3.desktop"
+  install -Dm644 linux/io.github.navarretenoir.ReglaDe3.metainfo.xml "$D/usr/share/metainfo/io.github.navarretenoir.ReglaDe3.metainfo.xml"
+  install -Dm644 linux/io.github.navarretenoir.ReglaDe3.svg "$D/usr/share/icons/hicolor/scalable/apps/io.github.navarretenoir.ReglaDe3.svg"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

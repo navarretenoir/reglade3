@@ -57,75 +57,78 @@
   function frac(a, b) { return "(" + a + ")/(" + b + ")"; }
   function chequear(vals) { for (var i = 0; i < vals.length; i++) if (!vals[i]) throw new TypeError("faltan valores"); }
 
+  /* ---------- explicaciones en lenguaje cotidiano ---------- */
+  function ud(v, nombre, dc) { return F(v, dc) + (nombre ? " " + nombre : ""); }
+  function pl(nombre) { return nombre || ""; }
+
   /* ---------- proporcionalidad ---------- */
   /* Directa: si «a» corresponde a «b», entonces «c» corresponde a x = b·c/a. */
   function directa(a, b, c, o) {
     o = o || {}; chequear([a, b, c]); if (a.esCero()) throw new RangeError("a no puede ser 0");
-    var x = b.mul(c).div(a), dc = o.dec === undefined ? 6 : o.dec, n = o.nombres || {};
-    return { tipo: "directa", valor: x, formula: "x = (b · c) ÷ a", pasos: [
-      "Las dos magnitudes son directamente proporcionales: si una aumenta, la otra aumenta en la misma razón.",
-      "Planteamos la proporción: " + F(a, dc) + " es a " + F(b, dc) + " como " + F(c, dc) + " es a x.",
-      "En forma de fracciones: " + F(a, dc) + "/" + F(b, dc) + " = " + F(c, dc) + "/x.",
-      "Multiplicamos en cruz: " + F(a, dc) + " · x = " + F(b, dc) + " · " + F(c, dc) + ".",
-      "Despejamos x: x = (" + F(b, dc) + " · " + F(c, dc) + ") ÷ " + F(a, dc) + " = " + F(b.mul(c), dc) + " ÷ " + F(a, dc) + ".",
-      "Resultado: x = " + F(x, dc) + (n.y ? " " + n.y : "") + "." + (x.esEntero() ? "" : "  (exacto: " + x.fraccion() + ")")] };
+    var x = b.mul(c).div(a), dc = o.dec === undefined ? 6 : o.dec, n = o.nombres || {}, unit = b.div(a);
+    return { tipo: "directa", valor: x, formula: "(" + F(b, dc) + " × " + F(c, dc) + ") ÷ " + F(a, dc) + " = " + F(x, dc), pasos: [
+      "Sabemos que " + ud(a, n.a, dc) + " corresponden a " + ud(b, n.b, dc) + ".",
+      "Si hay más de uno, hay más del otro, en la misma proporción. Por eso buscamos cuánto corresponde a 1: " + F(b, dc) + " ÷ " + F(a, dc) + " = " + F(unit, dc) + ".",
+      "Eso significa que 1" + (n.a ? " " + n.a : "") + " corresponde a " + ud(unit, n.b, dc) + ".",
+      "Ahora lo multiplicamos por la cantidad que te interesa: " + F(unit, dc) + " × " + F(c, dc) + " = " + F(x, dc) + ".",
+      "Respuesta: " + ud(c, n.a, dc) + " corresponden a " + ud(x, n.b, dc) + "." + (x.esEntero() ? "" : "  (Valor exacto: " + x.fraccion() + ")")] };
   }
   /* Inversa: si «a» corresponde a «b», entonces «c» corresponde a x = a·b/c. */
   function inversa(a, b, c, o) {
     o = o || {}; chequear([a, b, c]); if (c.esCero()) throw new RangeError("c no puede ser 0");
-    var x = a.mul(b).div(c), dc = o.dec === undefined ? 6 : o.dec, n = o.nombres || {};
-    return { tipo: "inversa", valor: x, formula: "x = (a · b) ÷ c", pasos: [
-      "Las dos magnitudes son inversamente proporcionales: si una aumenta, la otra disminuye en la misma razón; su producto se mantiene constante.",
-      "El producto original es " + F(a, dc) + " · " + F(b, dc) + " = " + F(a.mul(b), dc) + ".",
-      "Ese mismo producto debe cumplirse con el nuevo valor: " + F(c, dc) + " · x = " + F(a.mul(b), dc) + ".",
-      "Despejamos x: x = " + F(a.mul(b), dc) + " ÷ " + F(c, dc) + ".",
-      "Resultado: x = " + F(x, dc) + (n.y ? " " + n.y : "") + "." + (x.esEntero() ? "" : "  (exacto: " + x.fraccion() + ")")] };
+    var x = a.mul(b).div(c), dc = o.dec === undefined ? 6 : o.dec, n = o.nombres || {}, prod = a.mul(b);
+    return { tipo: "inversa", valor: x, formula: "(" + F(a, dc) + " × " + F(b, dc) + ") ÷ " + F(c, dc) + " = " + F(x, dc), pasos: [
+      "Sabemos que con " + ud(a, n.a, dc) + " se necesitan " + ud(b, n.b, dc) + ".",
+      "Aquí, cuando uno aumenta, el otro disminuye: el \"trabajo total\" siempre es el mismo. Lo calculamos multiplicando: " + F(a, dc) + " × " + F(b, dc) + " = " + F(prod, dc) + ".",
+      "Con " + ud(c, n.a, dc) + " ese mismo total se reparte distinto: " + F(prod, dc) + " ÷ " + F(c, dc) + " = " + F(x, dc) + ".",
+      "Respuesta: con " + ud(c, n.a, dc) + " se necesitan " + ud(x, n.b, dc) + "." + (x.esEntero() ? "" : "  (Valor exacto: " + x.fraccion() + ")")] };
   }
   /* Compuesta: x = b · Π razón_i; cada fila trae a (dato original), c (dato nuevo) y su tipo («directa» o «inversa»). */
   function compuesta(b, filas, o) {
     o = o || {}; var dc = o.dec === undefined ? 6 : o.dec; chequear([b]);
     if (!filas || !filas.length) throw new TypeError("faltan magnitudes");
-    var x = b, pasos = ["Es una regla de tres compuesta: x depende de varias magnitudes a la vez. Comparamos cada una con la incógnita por separado."], i, f, r;
+    var x = b, i, f, r, un = o.nombres && o.nombres.y ? o.nombres.y : "";
     for (i = 0; i < filas.length; i++) { f = filas[i]; chequear([f.a, f.c]); if (f.a.esCero() || f.c.esCero()) throw new RangeError("los valores de las magnitudes no pueden ser 0"); }
-    pasos.push("Dato de partida: " + F(b, dc) + ".");
+    var pasos = ["Partimos del dato que ya conoces: " + ud(b, un, dc) + ". Ahora vemos, una por una, cómo cambia con cada cosa que varía."];
     for (i = 0; i < filas.length; i++) {
-      f = filas[i]; r = f.tipo === "inversa" ? f.a.div(f.c) : f.c.div(f.a);
-      pasos.push("Magnitud " + (i + 1) + (f.nombre ? " (" + f.nombre + ")" : "") + ": relación " + (f.tipo === "inversa" ? "inversa" : "directa") + ". Razón = " +
-        (f.tipo === "inversa" ? F(f.a, dc) + "/" + F(f.c, dc) : F(f.c, dc) + "/" + F(f.a, dc)) + " = " + F(r, dc) + ".");
+      f = filas[i]; r = f.tipo === "inversa" ? f.a.div(f.c) : f.c.div(f.a); var nm = f.nombre || ("la cantidad " + (i + 1));
+      pasos.push(nm.charAt(0).toUpperCase() + nm.slice(1) + " pasa de " + F(f.a, dc) + " a " + F(f.c, dc) + ". " +
+        (f.tipo === "inversa" ? "Como al subir esto el resultado baja, multiplicamos por " + F(f.a, dc) + "/" + F(f.c, dc) : "Como al subir esto el resultado también sube, multiplicamos por " + F(f.c, dc) + "/" + F(f.a, dc)) + " = " + F(r, dc) + ".");
       x = x.mul(r);
     }
-    pasos.push("Multiplicamos el dato de partida por todas las razones: x = " + F(b, dc) + " · " + filas.map(function (f) { return f.tipo === "inversa" ? "(" + F(f.a, dc) + "/" + F(f.c, dc) + ")" : "(" + F(f.c, dc) + "/" + F(f.a, dc) + ")"; }).join(" · ") + ".");
-    pasos.push("Resultado: x = " + F(x, dc) + (o.nombres && o.nombres.y ? " " + o.nombres.y : "") + "." + (x.esEntero() ? "" : "  (exacto: " + x.fraccion() + ")"));
-    return { tipo: "compuesta", valor: x, formula: "x = b · Π (razón de cada magnitud)", pasos: pasos };
+    pasos.push("Multiplicamos tu dato por todos esos factores: " + F(b, dc) + filas.map(function (f) { return " × " + F(f.tipo === "inversa" ? f.a.div(f.c) : f.c.div(f.a), dc); }).join("") + " = " + F(x, dc) + ".");
+    pasos.push("Respuesta: " + ud(x, un, dc) + "." + (x.esEntero() ? "" : "  (Valor exacto: " + x.fraccion() + ")"));
+    return { tipo: "compuesta", valor: x, formula: F(b, dc) + filas.map(function (f) { return " × " + F(f.tipo === "inversa" ? f.a.div(f.c) : f.c.div(f.a), dc); }).join("") + " = " + F(x, dc), pasos: pasos };
   }
 
   /* ---------- porcentajes ---------- */
   var CIEN = new Q(100), UNO = new Q(1);
-  function porcentajeDe(p, n, o) { o = o || {}; var dc = o.dec === undefined ? 6 : o.dec; chequear([p, n]); var x = n.mul(p).div(CIEN);
-    return { tipo: "pct-de", valor: x, formula: "x = N · p ÷ 100", pasos: ["Planteamos: 100 % es " + F(n, dc) + " y " + F(p, dc) + " % es x.", "Proporción directa: x = " + F(n, dc) + " · " + F(p, dc) + " ÷ 100.", "Resultado: el " + F(p, dc) + " % de " + F(n, dc) + " es " + F(x, dc) + "."] }; }
+  function porcentajeDe(p, n, o) { o = o || {}; var dc = o.dec === undefined ? 6 : o.dec; chequear([p, n]); var x = n.mul(p).div(CIEN), uno = n.div(CIEN);
+    return { tipo: "pct-de", valor: x, formula: F(n, dc) + " × " + F(p, dc) + " ÷ 100 = " + F(x, dc), pasos: ["El 100 % es todo el número: " + F(n, dc) + ".", "El 1 % es la centésima parte: " + F(n, dc) + " ÷ 100 = " + F(uno, dc) + ".", "El " + F(p, dc) + " % son " + F(p, dc) + " veces ese 1 %: " + F(uno, dc) + " × " + F(p, dc) + " = " + F(x, dc) + ".", "Respuesta: el " + F(p, dc) + " % de " + F(n, dc) + " es " + F(x, dc) + "."] }; }
   function queEs(a, b, o) { o = o || {}; var dc = o.dec === undefined ? 6 : o.dec; chequear([a, b]); if (b.esCero()) throw new RangeError("el total no puede ser 0"); var x = a.mul(CIEN).div(b);
-    return { tipo: "pct-que", valor: x, formula: "p = A · 100 ÷ B", pasos: ["Planteamos: " + F(b, dc) + " es el 100 % y " + F(a, dc) + " es x %.", "Proporción directa: x = " + F(a, dc) + " · 100 ÷ " + F(b, dc) + ".", "Resultado: " + F(a, dc) + " es el " + F(x, dc) + " % de " + F(b, dc) + "."] }; }
+    return { tipo: "pct-que", valor: x, formula: F(a, dc) + " ÷ " + F(b, dc) + " × 100 = " + F(x, dc) + " %", pasos: ["Comparamos la parte con el total: " + F(a, dc) + " ÷ " + F(b, dc) + " = " + F(a.div(b), dc) + ".", "Para expresarlo como porcentaje, lo multiplicamos por 100: " + F(a.div(b), dc) + " × 100 = " + F(x, dc) + ".", "Respuesta: " + F(a, dc) + " es el " + F(x, dc) + " % de " + F(b, dc) + "."] }; }
   /* signo = +1 (aumento) o −1 (descuento) */
   function variacion(n, p, signo, o) { o = o || {}; var dc = o.dec === undefined ? 6 : o.dec; chequear([n, p]); var factor = UNO.add(p.div(CIEN).mul(new Q(signo)));
-    var x = n.mul(factor), cambio = x.sub(n);
-    return { tipo: signo > 0 ? "aumento" : "descuento", valor: x, cambio: cambio, formula: "F = N · (1 " + (signo > 0 ? "+" : "−") + " p ÷ 100)", pasos: [
-      "Un " + (signo > 0 ? "aumento" : "descuento") + " del " + F(p, dc) + " % equivale a multiplicar por " + F(factor, dc) + ".",
-      "Valor " + (signo > 0 ? "del aumento" : "del descuento") + ": " + F(n, dc) + " · " + F(p, dc) + " ÷ 100 = " + F(cambio.signo() < 0 ? cambio.neg() : cambio, dc) + ".",
-      "Resultado: " + F(n, dc) + (signo > 0 ? " + " : " − ") + F(cambio.signo() < 0 ? cambio.neg() : cambio, dc) + " = " + F(x, dc) + "."] }; }
+    var x = n.mul(factor), cambio = x.sub(n), mag = cambio.signo() < 0 ? cambio.neg() : cambio;
+    return { tipo: signo > 0 ? "aumento" : "descuento", valor: x, cambio: cambio, formula: F(n, dc) + (signo > 0 ? " + " : " − ") + F(mag, dc) + " = " + F(x, dc), pasos: [
+      "Primero calculamos cuánto es el " + F(p, dc) + " % de " + F(n, dc) + ": " + F(n, dc) + " × " + F(p, dc) + " ÷ 100 = " + F(mag, dc) + ".",
+      signo > 0 ? "Como es un aumento, esa cantidad se suma al valor original: " + F(n, dc) + " + " + F(mag, dc) + " = " + F(x, dc) + "." : "Como es un descuento, esa cantidad se resta al valor original: " + F(n, dc) + " − " + F(mag, dc) + " = " + F(x, dc) + ".",
+      "Respuesta: " + (signo > 0 ? "con el aumento" : "con el descuento") + " queda en " + F(x, dc) + "."] }; }
   /* conocido el valor final F tras un aumento/descuento de p %, halla el original */
   function original(f, p, signo, o) { o = o || {}; var dc = o.dec === undefined ? 6 : o.dec; chequear([f, p]); var factor = UNO.add(p.div(CIEN).mul(new Q(signo)));
-    if (factor.esCero()) throw new RangeError("con un descuento del 100 % no se puede recuperar el valor original"); var x = f.div(factor);
-    return { tipo: "original", valor: x, formula: "N = F ÷ (1 " + (signo > 0 ? "+" : "−") + " p ÷ 100)", pasos: [
-      "El valor final es el " + F(factor.mul(CIEN), dc) + " % del original (100 % " + (signo > 0 ? "+ " : "− ") + F(p, dc) + " %).",
-      "Planteamos: " + F(factor.mul(CIEN), dc) + " % es " + F(f, dc) + " y 100 % es x.", "Resultado: x = " + F(f, dc) + " · 100 ÷ " + F(factor.mul(CIEN), dc) + " = " + F(x, dc) + "."] }; }
+    if (factor.esCero()) throw new RangeError("con un descuento del 100 % no se puede recuperar el valor original"); var x = f.div(factor), pc = factor.mul(CIEN);
+    return { tipo: "original", valor: x, formula: F(f, dc) + " ÷ " + F(factor, dc) + " = " + F(x, dc), pasos: [
+      "El valor original era el 100 %. Con " + (signo > 0 ? "un aumento" : "un descuento") + " del " + F(p, dc) + " %, el valor final es el " + F(pc, dc) + " % del original.",
+      "Entonces " + F(f, dc) + " corresponde al " + F(pc, dc) + " %. Para hallar el 100 % dividimos por " + F(factor, dc) + ": " + F(f, dc) + " ÷ " + F(factor, dc) + " = " + F(x, dc) + ".",
+      "Respuesta: el valor original era " + F(x, dc) + "."] }; }
   /* IVA chileno: 19 %. «neto → bruto» o «bruto → neto». */
   var IVA = new Q(19);
   function iva(v, haciaBruto, o) { o = o || {}; var dc = o.dec === undefined ? 6 : o.dec; chequear([v]);
     var r = haciaBruto ? variacion(v, IVA, +1, o) : original(v, IVA, +1, o), x = r.valor, imp = haciaBruto ? x.sub(v) : v.sub(x);
-    return { tipo: "iva", valor: x, impuesto: imp, formula: haciaBruto ? "Bruto = Neto · 1,19" : "Neto = Bruto ÷ 1,19", pasos: [
-      "El IVA en Chile es 19 %: el precio bruto es el 119 % del neto.",
-      haciaBruto ? "Bruto = " + F(v, dc) + " · 1,19 = " + F(x, dc) + "." : "Neto = " + F(v, dc) + " ÷ 1,19 = " + F(x, dc) + ".",
-      "El IVA es " + F(imp, dc) + "."] }; }
+    return { tipo: "iva", valor: x, impuesto: imp, formula: haciaBruto ? F(v, dc) + " × 1,19 = " + F(x, dc) : F(v, dc) + " ÷ 1,19 = " + F(x, dc), pasos: [
+      "En Chile el IVA es el 19 %. El precio con IVA es el 119 % del precio sin IVA (neto).",
+      haciaBruto ? "Precio con IVA: " + F(v, dc) + " × 1,19 = " + F(x, dc) + "." : "Precio sin IVA: " + F(v, dc) + " ÷ 1,19 = " + F(x, dc) + ".",
+      "El IVA es la diferencia: " + F(imp, dc) + "."] }; }
 
   return { Q: Q, leer: Q.leer, directa: directa, inversa: inversa, compuesta: compuesta, porcentajeDe: porcentajeDe, queEs: queEs, variacion: variacion, original: original, iva: iva };
 });

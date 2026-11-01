@@ -1,9 +1,27 @@
-# Regla de tres
-App para resolver reglas de tres: **directa, inversa, compuesta y porcentajes** (incluye IVA 19 %), con el **paso a paso** en español de Chile.
-- Cálculo **exacto** con racionales (BigInt): sin errores de coma flotante; muestra la fracción exacta cuando no es entero.
-- Entiende números a la chilena (`1.234,56`, `12,5`, `3/4`).
-- Cualquier celda puede ser la incógnita (directa e inversa). Historial local, ajustes de decimales y tema claro/oscuro/automático.
-- Se adapta al dispositivo (móvil, tableta, escritorio; vertical y horizontal) con `app/js/dispositivo.js`.
-- Todo ocurre en el dispositivo, sin internet.
-Abrir: `app/index.html`. Pruebas del motor: `node tests/motor.test.js` (17 pruebas).
-Estado: proyecto privado en preparación; aún sin versiones para Android/Windows/Linux.
+# Regla de 3
+
+<p align="center"><img src="recursos/icono-256.png" alt="Regla de 3" width="128"></p>
+
+**Español.** Calcula lo que no sabes a partir de lo que sí sabes. Regla de tres **directa**, **inversa** y **compuesta**, **porcentajes**, aumentos, descuentos e **IVA (19 %)**, explicado **paso a paso con palabras simples**. No necesitas saber matemática: escribes lo que sabes, ves la respuesta al instante y puedes leer cómo se calculó.
+
+**English.** Work out what you don't know from what you do. **Direct**, **inverse** and **compound** rule of three, **percentages**, increases, discounts and **VAT (19 %)**, explained **step by step in plain words**. You don't need to know math: type what you know, see the answer instantly and read how it was calculated.
+
+| | |
+|---|---|
+| ✔ Más y más · Más y menos · Varias cosas · Porcentajes | Direct · Inverse · Compound · Percentages |
+| ✔ Resultados **exactos** (fracciones, sin errores de redondeo) | Exact results, no floating-point errors |
+| ✔ Números a la chilena (`1.234,56`, `12,5`, `3/4`) | Chilean number format |
+| ✔ Modo claro y oscuro · se adapta a móvil, tableta y escritorio | Light & dark · phone, tablet, desktop |
+| ✔ Sin internet · sin cuentas · sin publicidad | Offline · no accounts · no ads |
+
+## Plataformas / Platforms
+Linux (RPM, DEB, AppImage, Flatpak, Snap) · Windows 10/11 (instalador y Microsoft Store) · Android 4.0+ · macOS e iOS/iPadOS (proyecto XcodeGen).
+Las descargas están en las *releases*. Downloads are in the releases.
+
+## Desarrollo / Development
+- Interfaz compartida en `ui/` (HTML + CSS + JavaScript sin dependencias); motor matemático en `ui/js/regla3.js`.
+- Pruebas: `tests/ejecutar.sh` (Node.js). Linux: `make -C desktop` (GTK 4 + WebKitGTK 6). Windows: `herramientas/winhost/construir.sh windows`. Android: `cd android && ./gradlew assembleRelease`. Apple: `apple/LEEME.txt`.
+- Empaquetado desde el código fuente para Arch, Fedora/openSUSE y Debian/Ubuntu: `packaging/`.
+
+## Licencia y autoría / License & credits
+GPL-3.0-or-later. Desarrollada por **Javiera Navarrete**. Hecha con asistencia de IA generativa: ver [AI-USO.md](AI-USO.md). Privacidad: [PRIVACY.md](PRIVACY.md).

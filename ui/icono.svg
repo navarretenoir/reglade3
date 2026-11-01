@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="1024" height="1024">
+ <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC24A"/><stop offset="1" stop-color="#FF8A00"/></linearGradient>
+ <radialGradient id="r" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+ <rect width="64" height="64" rx="14.4" fill="url(#g)"/><rect width="64" height="64" rx="14.4" fill="url(#r)"/>
+ <g fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round">
+  <path d="M10 33h16"/><path d="M38 33h16"/><path d="M30 29.5h4M30 36.5h4"/>
+ </g>
+ <g fill="#fff" font-family="Inter,Helvetica,Arial,sans-serif" font-weight="700" font-size="14" text-anchor="middle">
+  <text x="18" y="27">3</text><text x="18" y="49">12</text><text x="46" y="27">5</text>
+ </g>
+ <rect x="38" y="38" width="16" height="14" rx="4" fill="#fff"/><text x="46" y="49.5" font-family="Inter,Helvetica,Arial,sans-serif" font-weight="800" font-size="13" text-anchor="middle" fill="#FF8A00">x</text>
+</svg>

@@ -60,3 +60,13 @@ html[data-ventana="compacta"] .card{padding:18px;border-radius:20px}html[data-ve
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 html[data-ventana="compacta"] .seg button{padding:0 8px;font-size:14px}
+
+.mut{color:var(--mut);font-size:14px;margin:0 0 12px}
+.pie{margin-top:30px;text-align:center;color:var(--mut);font-size:13.5px;line-height:1.6}.pie p{margin:0}.pie b{color:var(--ink);font-weight:600}
+.sub-t{color:var(--mut);font-size:14px;margin:-8px 0 14px}
+.ej{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:.5px solid var(--line)}.ej:last-child{border:0}.ej .t{flex:1}.ej b{display:block}.ej small{color:var(--mut);display:block;line-height:1.4}
+.hint{color:var(--bad);font-size:13.5px;margin-top:10px;display:none}.hint.on{display:block}
+.lead{font-weight:600;margin:0 0 4px;font-size:17px;letter-spacing:-.02em}
+
+html[data-tema="oscuro"] .seg .th{background:var(--sf2)}
+@media (prefers-color-scheme:dark){html:not([data-tema="claro"]) .seg .th{background:var(--sf2)}}

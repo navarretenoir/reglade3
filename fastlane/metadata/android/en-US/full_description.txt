@@ -1,0 +1,13 @@
+Work out what you don't know from what you do. Rule of 3 solves everyday calculations in seconds: how much do 5 kilos cost if 3 cost $2,400, how many days do 6 people need for a job 4 people finish in 12, what a 25 % discount or the VAT comes to.
+
+You don't need to know math: type what you know, see the answer instantly and, if you like, read how it was worked out in plain words.
+
+• Direct (more and more), inverse (more and less) and compound (several things at once) rule of three
+• Percentages, increases, discounts and 19 % VAT
+• Step-by-step explanations in everyday language
+• Exact results, no rounding errors
+• Examples to try and help to choose what to use
+• Light and dark mode
+• Works offline, no accounts, no ads: your calculations stay on your phone
+
+Developed by Javiera Navarrete. Free software (GPL-3.0-or-later).

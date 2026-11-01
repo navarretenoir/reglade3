@@ -1,0 +1,10 @@
+Regla de 3 calcula lo que no sabes a partir de lo que sí sabes, y te explica cómo, con palabras simples.
+
+Qué puedes hacer:
+  • Regla de tres directa, inversa y compuesta.
+  • Porcentajes, aumentos, descuentos e IVA (19 %).
+  • Ver el paso a paso de cada resultado.
+  • Modo claro y modo oscuro.
+  • Funciona sin internet y sin cuentas.
+
+Desarrollada por Javiera Navarrete.

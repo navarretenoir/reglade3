@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Regla de 3
+GenericName=Calculadora de regla de tres
+Comment=Calcula lo que no sabes a partir de lo que sí sabes, paso a paso
+Comment[en]=Rule of three made easy, step by step
+Exec=regla-de-3
+Icon=io.github.navarretenoir.ReglaDe3
+Terminal=false
+Categories=Education;Utility;Calculator;
+Keywords=regla de tres;proporcion;porcentaje;descuento;iva;calculadora;rule of three;percentage;
+StartupWMClass=io.github.navarretenoir.ReglaDe3
+X-Developer=Javiera Navarrete

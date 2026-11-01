@@ -1,0 +1,13 @@
+Calcula lo que no sabes a partir de lo que sí sabes. Regla de 3 resuelve en segundos cálculos de todos los días: cuánto cuestan 5 kilos si 3 cuestan $2.400, en cuántos días terminan 6 personas un trabajo que 4 hacen en 12 días, cuánto es el 25 % de descuento o cuánto es el IVA.
+
+No necesitas saber matemática: escribes lo que sabes, ves la respuesta al instante y, si quieres, lees cómo se calculó con palabras simples.
+
+• Regla de tres directa (más y más), inversa (más y menos) y compuesta (varias cosas a la vez)
+• Porcentajes, aumentos, descuentos y IVA de 19 %
+• Explicación paso a paso en lenguaje cotidiano
+• Resultados exactos, sin errores de redondeo
+• Ejemplos para probar y ayuda para elegir qué usar
+• Modo claro y modo oscuro
+• Funciona sin internet, sin cuentas y sin publicidad: tus cálculos se quedan en tu teléfono
+
+Desarrollada por Javiera Navarrete. Software libre (GPL-3.0-or-later).

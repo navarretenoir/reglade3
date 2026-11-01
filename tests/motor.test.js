@@ -1,4 +1,4 @@
-const R = require("../app/js/regla3.js"), assert = require("assert"); let n = 0;
+const R = require("../ui/js/regla3.js"), assert = require("assert"); let n = 0;
 function t(nombre, f) { try { f(); n++; console.log("✔", nombre); } catch (e) { console.log("✗", nombre, "→", e.message); process.exitCode = 1; } }
 const q = R.leer, F = (x, d = 6) => x.formato(d);
 t("lectura chilena", () => { assert.equal(F(q("1.234,56")), "1.234,56"); assert.equal(F(q("12,5")), "12,5"); assert.equal(F(q("1.234")), "1.234"); assert.equal(F(q("1234.5")), "1.234,5"); assert.equal(F(q("3/4")), "0,75"); assert.equal(F(q("-7")), "−7"); assert.equal(q("abc"), null); assert.equal(q("1,2,3"), null); assert.equal(q(""), null); });
@@ -16,6 +16,6 @@ t("IVA: 10.000 neto → 11.900; 11.900 bruto → 10.000", () => { assert.equal(F
 t("IVA impuesto de 10.000 = 1.900", () => assert.equal(F(R.iva(q("10000"), true).impuesto), "1.900"));
 t("división por cero rechazada", () => { assert.throws(() => R.directa(q("0"), q("1"), q("1"))); assert.throws(() => R.inversa(q("1"), q("1"), q("0"))); assert.throws(() => R.original(q("1"), q("100"), -1)); });
 t("redondeo mitad lejos de cero", () => { assert.equal(F(q("2,675"), 2), "2,68"); assert.equal(F(q("-2,675"), 2), "−2,68"); assert.equal(F(q("0,005"), 2), "0,01"); assert.equal(F(q("0,004"), 2), "0"); });
-t("pasos en español presentes", () => { const r = R.directa(q("3"), q("12"), q("5")); assert(r.pasos.length >= 5 && /Resultado: x = 20/.test(r.pasos[r.pasos.length - 1])); });
+t("pasos en lenguaje cotidiano", () => { const r = R.directa(q("3"), q("2400"), q("5"), { nombres: { a: "kilos", b: "pesos" } }); assert(r.pasos.length >= 5); assert(/Respuesta: 5 kilos corresponden a 4.000 pesos/.test(r.pasos[r.pasos.length - 1]), r.pasos[r.pasos.length - 1]); assert(/1 kilos? corresponde a 800 pesos/.test(r.pasos[2]) , r.pasos[2]); });
 t("números grandes sin pérdida", () => assert.equal(F(R.directa(q("1"), q("123456789012345678"), q("1000")).valor), "123.456.789.012.345.678.000"));
 console.log(n + " pruebas OK" + (process.exitCode ? " — HAY FALLOS" : ""));

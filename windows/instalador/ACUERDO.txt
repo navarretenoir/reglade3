@@ -1,0 +1,7 @@
+ACUERDO DE USO — REGLA DE 3
+
+1. Regla de 3 es software libre (GPL-3.0-or-later), desarrollado por Javiera Navarrete. Se entrega «tal cual», sin garantías.
+2. La app calcula con fracciones exactas, pero tú eres responsable de revisar los resultados antes de usarlos en decisiones
+   importantes (dinero, salud, trabajo o estudios).
+3. La app funciona sin internet, no pide cuentas y no envía tus datos a nadie. Lo que guardas se queda en tu equipo.
+4. Puedes copiarla, estudiarla y mejorarla según los términos de la licencia GPL-3.0-or-later.

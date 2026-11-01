@@ -1,0 +1,3 @@
+Regla de 3 para Linux — desarrollada por Javiera Navarrete.
+Paquetes: RPM, DEB, AppImage, Flatpak, Snap y tarball (regla-de-3-<v>-linux-x86_64.tar.gz: descomprimir y correr ./instalar.sh).
+Comprobar integridad: sha256sum -c SHA256SUMS

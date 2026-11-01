@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+D = $(CURDIR)/debian/regla-de-3
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	make -C desktop UI_DIR=/usr/share/regla-de-3/ui EXTRA_CFLAGS="$(shell dpkg-buildflags --get CFLAGS) $(shell dpkg-buildflags --get CPPFLAGS) $(shell dpkg-buildflags --get LDFLAGS)"
+
+override_dh_auto_install:
+	install -Dm755 desktop/regla-de-3 "$(D)/usr/bin/regla-de-3"
+	install -d "$(D)/usr/share/regla-de-3"; cp -r ui "$(D)/usr/share/regla-de-3/"; rm -f "$(D)/usr/share/regla-de-3/ui/"*.bak*
+	install -Dm644 linux/io.github.navarretenoir.ReglaDe3.desktop "$(D)/usr/share/applications/io.github.navarretenoir.ReglaDe3.desktop"
+	install -Dm644 linux/io.github.navarretenoir.ReglaDe3.metainfo.xml "$(D)/usr/share/metainfo/io.github.navarretenoir.ReglaDe3.metainfo.xml"
+	install -Dm644 linux/io.github.navarretenoir.ReglaDe3.svg "$(D)/usr/share/icons/hicolor/scalable/apps/io.github.navarretenoir.ReglaDe3.svg"
+
+override_dh_auto_clean:
+	-$(MAKE) -C desktop clean

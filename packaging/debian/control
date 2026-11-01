@@ -1,0 +1,16 @@
+Source: regla-de-3
+Section: utils
+Priority: optional
+Maintainer: Javiera Navarrete <navarrete.noir@gmail.com>
+Build-Depends: debhelper-compat (= 13), pkgconf, libgtk-4-dev, libwebkitgtk-6.0-dev
+Standards-Version: 4.7.0
+Homepage: https://github.com/navarretenoir/regla3
+Rules-Requires-Root: no
+
+Package: regla-de-3
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Rule of three made easy, step by step
+ Direct, inverse and compound rule of three, percentages, discounts and 19%
+ VAT, explained step by step in plain words. No internet, no accounts.
+ Interface in Spanish.

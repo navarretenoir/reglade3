@@ -1,0 +1,24 @@
+# Regla de 3 — manifiesto Flathub (compila desde el código). Desarrollada por Javiera Navarrete.
+id: io.github.navarretenoir.ReglaDe3
+runtime: org.gnome.Platform
+runtime-version: '49'
+sdk: org.gnome.Sdk
+command: regla-de-3
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+modules:
+  - name: regla-de-3
+    buildsystem: simple
+    build-commands:
+      - make -C desktop UI_DIR=/app/share/regla-de-3/ui
+      - install -Dm755 desktop/regla-de-3 /app/bin/regla-de-3
+      - mkdir -p /app/share/regla-de-3 && cp -r ui /app/share/regla-de-3/ && rm -f /app/share/regla-de-3/ui/*.bak*
+      - install -Dm644 linux/io.github.navarretenoir.ReglaDe3.desktop /app/share/applications/io.github.navarretenoir.ReglaDe3.desktop
+      - install -Dm644 linux/io.github.navarretenoir.ReglaDe3.metainfo.xml /app/share/metainfo/io.github.navarretenoir.ReglaDe3.metainfo.xml
+      - install -Dm644 linux/io.github.navarretenoir.ReglaDe3.svg /app/share/icons/hicolor/scalable/apps/io.github.navarretenoir.ReglaDe3.svg
+    sources:
+      - type: dir
+        path: ..

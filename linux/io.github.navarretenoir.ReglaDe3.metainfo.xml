@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.navarretenoir.ReglaDe3</id>
+  <name>Regla de 3</name>
+  <summary>Calcula lo que no sabes a partir de lo que sí sabes, paso a paso</summary>
+  <summary xml:lang="en">Rule of three made easy, explained step by step</summary>
+  <developer id="io.github.navarretenoir"><name>Javiera Navarrete</name></developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <description>
+    <p>Regla de 3 resuelve en segundos cálculos de todos los días: cuánto cuestan 5 kilos si 3 cuestan $2.400, en cuántos días terminan 6 personas un trabajo que 4 hacen en 12, cuánto es el 25 % de descuento o cuánto es el IVA. No necesitas saber matemática: escribes lo que sabes, ves la respuesta y puedes leer cómo se calculó, con palabras simples.</p>
+    <ul>
+      <li>Regla de tres directa, inversa y compuesta</li>
+      <li>Porcentajes, aumentos, descuentos y IVA de 19 %</li>
+      <li>Explicación paso a paso en lenguaje cotidiano</li>
+      <li>Resultados exactos, sin errores de redondeo</li>
+      <li>Modo claro y modo oscuro</li>
+      <li>Sin internet, sin cuentas y sin publicidad</li>
+    </ul>
+    <p xml:lang="en">Rule of 3 solves everyday calculations in seconds: how much do 5 kilos cost if 3 cost $2,400, how many days do 6 people need for a job 4 people finish in 12, what a 25 % discount or the VAT comes to. You do not need to know math: type what you know, see the answer and read how it was worked out in plain words.</p>
+    <ul xml:lang="en">
+      <li>Direct, inverse and compound rule of three</li>
+      <li>Percentages, increases, discounts and 19 % VAT</li>
+      <li>Step-by-step explanations in everyday language</li>
+      <li>Exact results, no rounding errors</li>
+      <li>Light and dark mode</li>
+      <li>No internet, no accounts, no ads</li>
+    </ul>
+    <p>Desarrollada por Javiera Navarrete. / Developed by Javiera Navarrete.</p>
+  </description>
+  <url type="homepage">https://github.com/navarretenoir/regla3</url>
+  <url type="vcs-browser">https://gitlab.com/navarretenoir/regla3</url>
+  <url type="bugtracker">https://gitlab.com/navarretenoir/regla3/-/issues</url>
+  <screenshots>
+    <screenshot type="default"><image>https://raw.githubusercontent.com/navarretenoir/regla3/main/screenshots/1.png</image></screenshot>
+    <screenshot><image>https://raw.githubusercontent.com/navarretenoir/regla3/main/screenshots/2.png</image></screenshot>
+  </screenshots>
+  <launchable type="desktop-id">io.github.navarretenoir.ReglaDe3.desktop</launchable>
+  <provides><binary>regla-de-3</binary></provides>
+  <categories><category>Education</category><category>Utility</category></categories>
+  <content_rating type="oars-1.1"/>
+  <releases><release version="1.0" date="2026-11-02"/></releases>
+</component>
