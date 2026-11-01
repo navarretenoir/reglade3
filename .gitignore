@@ -17,3 +17,4 @@ symbian/build
 symbian/dist
 android-antiguo/build
 android-antiguo/dist
+c64/*.prg

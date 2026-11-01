@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Regla de 3</title>
+<style>
+body{margin:0;padding:12px;font-family:Arial,Helvetica,sans-serif;background:#f5f5f7;color:#1d1d1f;font-size:16px}
+h1{font-size:26px;margin:0 0 4px}p{margin:4px 0}.c{max-width:560px;margin:0 auto}
+label{display:block;font-weight:bold;margin:12px 0 4px;font-size:14px}
+select,input{width:100%;box-sizing:border-box;font-size:18px;padding:10px;border:1px solid #bbb;border-radius:8px;background:#fff;color:#1d1d1f}
+button{font-size:18px;padding:12px 22px;margin-top:14px;border:0;border-radius:24px;background:#ff8a00;color:#fff;font-weight:bold}
+#res{font-size:24px;font-weight:bold;margin-top:16px}#pasos{margin-top:10px;font-size:15px;line-height:1.45}
+.pie{margin-top:24px;color:#6e6e73;font-size:13px;text-align:center}
+</style></head><body><div class="c">
+<h1>Regla de 3</h1><p>Calcula lo que no sabes a partir de lo que si sabes.</p>
+<label for="t">Que quieres calcular?</label><select id="t"></select>
+<label id="l0" for="e0"></label><input id="e0" type="text">
+<label id="l1" for="e1"></label><input id="e1" type="text">
+<label id="l2" for="e2"></label><input id="e2" type="text">
+<button id="b" type="button">Calcular</button>
+<div id="res"></div><div id="pasos"></div>
+<div class="pie">Desarrollada por Javiera Navarrete. Funciona sin internet.</div></div>
+<script src="regla.js"></script>
+<script>
+(function(){var t=document.getElementById("t"),i,n=Regla.T.NOMBRES;for(i=0;i<n.length;i++){var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(n[i]));t.appendChild(o);}
+function g(id){return document.getElementById(id);}
+function et(){var e=Regla.T.etiquetas(+t.value),k;for(k=0;k<3;k++){g("l"+k).innerHTML=e[k];var d=e[k]?"block":"none";g("l"+k).style.display=d;g("e"+k).style.display=d;}g("res").innerHTML="";g("pasos").innerHTML="";}
+t.onchange=et;et();
+g("b").onclick=function(){var r=Regla.T.calcular(+t.value,[g("e0").value,g("e1").value,g("e2").value],2);if(!r.ok){g("res").innerHTML=r.error;g("pasos").innerHTML="";return;}
+var h="Como se calculo:<br>",k;g("res").innerHTML="La respuesta es: "+Regla.fmt(r.x,2)+(r.extra?"<br><span style='font-size:15px;font-weight:normal'>"+r.extra+"</span>":"");for(k=0;k<r.pasos.length;k++)h+=(k+1)+". "+r.pasos[k]+"<br>";g("pasos").innerHTML=h;};})();
+</script></body></html>
