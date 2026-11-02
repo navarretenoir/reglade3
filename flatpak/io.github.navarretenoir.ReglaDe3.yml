@@ -1,7 +1,7 @@
 # Regla de 3 — manifiesto Flathub (compila desde el código). Desarrollada por Javiera Navarrete.
-id: io.github.navarretenoir.ReglaDe3
+app-id: io.github.navarretenoir.ReglaDe3
 runtime: org.gnome.Platform
-runtime-version: '49'
+runtime-version: '51'
 sdk: org.gnome.Sdk
 command: regla-de-3
 finish-args:
@@ -20,5 +20,7 @@ modules:
       - install -Dm644 linux/io.github.navarretenoir.ReglaDe3.metainfo.xml /app/share/metainfo/io.github.navarretenoir.ReglaDe3.metainfo.xml
       - install -Dm644 linux/io.github.navarretenoir.ReglaDe3.svg /app/share/icons/hicolor/scalable/apps/io.github.navarretenoir.ReglaDe3.svg
     sources:
-      - type: dir
-        path: ..
+      - type: git
+        url: https://github.com/navarretenoir/regla3.git
+        tag: v1.0
+        commit: 606f2bc37e23fbf3b1c9bb2e6bef6c5475dd41a7
