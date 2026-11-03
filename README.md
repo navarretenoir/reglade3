@@ -25,4 +25,4 @@ Las descargas están en las *releases*. Downloads are in the releases.
 - Empaquetado desde el código fuente para Arch, Fedora/openSUSE y Debian/Ubuntu: `packaging/`.
 
 ## Licencia y autoría / License & credits
-GPL-3.0-or-later. Desarrollada por **Javiera Navarrete**. Hecha con asistencia de IA generativa: ver [AI-USO.md](AI-USO.md). Privacidad: [PRIVACY.md](PRIVACY.md).
+GPL-3.0-or-later. Desarrollada por **Javiera Navarrete**. Privacidad: [PRIVACY.md](PRIVACY.md).
