@@ -1,5 +1,6 @@
 /* Paridad núcleo C <-> motor JS de Regla de 3: imprime «etiqueta=valor» para una lista de casos. */
 #include <stdio.h>
+#include <string.h>
 #include "../nucleo/regla.h"
 static void m(const char *e, double x) { char b[64]; rg_fmt(x, 2, 0, b); printf("%s=%s\n", e, b); }
 static void l(const char *s) { double v; char b[64]; if (rg_leer(s, &v)) { rg_fmt(v, 4, 0, b); printf("leer(%s)=%s\n", s, b); } else printf("leer(%s)=NULO\n", s); }
@@ -20,5 +21,7 @@ int main(void) {
     rg_iva(11900, 0, 2, &r); m("iva bruto 11900", r.x);
     rg_directa(0, 1, 1, 2, "", "", &r); printf("directa a=0 ok=%d\n", r.ok);
     l("1.234,56"); l("12,5"); l("1.234"); l("1234.5"); l("3/4"); l("-7"); l("abc"); l("1,2,3"); l("0,1"); l("10.000"); l("2,5/0,5");
+    { char g[100]; int i; char grande[80]; for (i = 0; i < 78; i++) grande[i] = '1'; grande[78] = 0; l(grande);
+      rg_fmt(1e300, 2, 0, g); printf("fmt(1e300)-acotado=%s\n", strlen(g) < 40 ? "ok" : "DESBORDA"); }
     return 0;
 }

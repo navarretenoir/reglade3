@@ -51,6 +51,7 @@ void rg_fmt(double x, int dec, int ceros, char *out) {
     for (i = 0; i < dec; i++) esc *= 10.0;
     if (x < 0) { neg = 1; x = -x; }
     v = floor(x * esc + 0.5 + 1e-9 * (x * esc > 1.0 ? 1.0 : 0.0));
+    if (v >= 1e21) { sprintf(out, neg ? "-%.6e" : "%.6e", x); return; }   /* acotado: «%.0f» de 1e300 desbordaba los buffers de 48 bytes de quien llama */
     if (v >= 1e15) { sprintf(out, neg ? "-%.0f" : "%.0f", x); return; }
     sprintf(dig, "%.0f", v); nd = (int)strlen(dig);
     while (nd <= dec) { memmove(dig + 1, dig, (size_t)nd + 1); dig[0] = '0'; nd++; }

@@ -18,4 +18,5 @@ t("división por cero rechazada", () => { assert.throws(() => R.directa(q("0"), 
 t("redondeo mitad lejos de cero", () => { assert.equal(F(q("2,675"), 2), "2,68"); assert.equal(F(q("-2,675"), 2), "−2,68"); assert.equal(F(q("0,005"), 2), "0,01"); assert.equal(F(q("0,004"), 2), "0"); });
 t("pasos en lenguaje cotidiano", () => { const r = R.directa(q("3"), q("2400"), q("5"), { nombres: { a: "kilos", b: "pesos" } }); assert(r.pasos.length >= 5); assert(/Respuesta: 5 kilos corresponden a 4.000 pesos/.test(r.pasos[r.pasos.length - 1]), r.pasos[r.pasos.length - 1]); assert(/1 kilos? corresponde a 800 pesos/.test(r.pasos[2]) , r.pasos[2]); });
 t("números grandes sin pérdida", () => assert.equal(F(R.directa(q("1"), q("123456789012345678"), q("1000")).valor), "123.456.789.012.345.678.000"));
+t("entrada demasiado larga se rechaza (paridad con el núcleo C)", () => { assert.equal(q("1".repeat(77)) !== null, true); assert.equal(q("1".repeat(78)), null); assert.equal(q("0," + "0".repeat(200000) + "1"), null); });
 console.log(n + " pruebas OK" + (process.exitCode ? " — HAY FALLOS" : ""));

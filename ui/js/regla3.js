@@ -37,7 +37,9 @@
   /* Lee un número escrito a la chilena: «1.234,56», «12,5», «1234.5», «3/4», «−7». Devuelve Q o null. */
   Q.leer = function (s) {
     if (s == null) return null;
-    s = String(s).trim().replace(/\s+/g, "").replace(/−/g, "-").replace(/^\+/, "");
+    s = String(s).trim();
+    if (s.length >= 78) return null;      /* mismo tope que el núcleo C: evita que un texto enorme congele la página (10n ** miles de dígitos) */
+    s = s.replace(/\s+/g, "").replace(/−/g, "-").replace(/^\+/, "");
     if (!s) return null;
     var fr = s.match(/^(-?[\d.,]+)\/([\d.,]+)$/);
     if (fr) { var a = Q.leer(fr[1]), b = Q.leer(fr[2]); return a && b && !b.esCero() ? a.div(b) : null; }

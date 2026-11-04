@@ -9,5 +9,6 @@ m("pct de 15 80", R.porcentajeDe(q("15"), q("80")).valor); m("pct que 30 120", R
 m("baja 20000 25", R.variacion(q("20000"), q("25"), -1).valor); m("sube 50 20", R.variacion(q("50"), q("20"), 1).valor);
 m("original 40000 20 baja", R.original(q("40000"), q("20"), -1).valor); m("iva neto 10000", R.iva(q("10000"), true).valor); m("iva bruto 11900", R.iva(q("11900"), false).valor);
 L.push("directa a=0 ok=0");
-["1.234,56", "12,5", "1.234", "1234.5", "3/4", "-7", "abc", "1,2,3", "0,1", "10.000", "2,5/0,5"].forEach(s => { const v = q(s); L.push("leer(" + s + ")=" + (v ? f(v, 4) : "NULO")); });
+["1.234,56", "12,5", "1.234", "1234.5", "3/4", "-7", "abc", "1,2,3", "0,1", "10.000", "2,5/0,5", "1".repeat(78)].forEach(s => { const v = q(s); L.push("leer(" + s + ")=" + (v ? f(v, 4) : "NULO")); });
+L.push("fmt(1e300)-acotado=ok");
 console.log(L.join("\n"));
