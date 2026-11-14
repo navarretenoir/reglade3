@@ -3,8 +3,8 @@ package cl.regla3;
 /** Los nueve cálculos que ofrecen las versiones Java (Java ME y Android antiguo) y sus textos. */
 public final class Tipos {
     public static final String[] NOMBRES = {
-        "Mas y mas: si una cosa sube, la otra tambien", "Mas y menos: si una cosa sube, la otra baja", "Calcular un % de un numero",
-        "Que porcentaje es una parte del total", "Subir un valor un cierto %", "Bajar un valor un cierto %", "Volver al precio original",
+        "Más y más: si una cosa sube, la otra también", "Más y menos: si una cosa sube, la otra baja", "Calcular un % de un numero",
+        "Qué porcentaje es una parte del total", "Subir un valor un cierto %", "Bajar un valor un cierto %", "Volver al precio original",
         "IVA 19 %: de precio sin IVA a con IVA", "IVA 19 %: de precio con IVA a sin IVA" };
 
     private Tipos() {}
@@ -12,11 +12,11 @@ public final class Tipos {
     /** Etiquetas de los campos (hasta 3) para el tipo t; los vacíos no se muestran. */
     public static String[] etiquetas(int t) {
         switch (t) {
-            case 0: case 1: return new String[] { "Lo que ya se: primera cosa (ej.: 3)", "Lo que ya se: segunda cosa (ej.: 2400)", "Calcular para esta cantidad de la primera cosa" };
-            case 2: return new String[] { "El porcentaje (%)", "De este numero", "" };
+            case 0: case 1: return new String[] { "Lo que ya sé: primera cosa (ej.: 3)", "Lo que ya sé: segunda cosa (ej.: 2400)", "Calcular para esta cantidad de la primera cosa" };
+            case 2: return new String[] { "El porcentaje (%)", "De este número", "" };
             case 3: return new String[] { "La parte", "Del total", "" };
-            case 4: return new String[] { "Valor de partida", "Cuanto sube (%)", "" };
-            case 5: return new String[] { "Valor de partida", "Cuanto baja (%)", "" };
+            case 4: return new String[] { "Valor de partida", "Cuánto sube (%)", "" };
+            case 5: return new String[] { "Valor de partida", "Cuánto baja (%)", "" };
             case 6: return new String[] { "Valor final (lo que pagaste)", "Porcentaje de descuento", "" };
             default: return new String[] { "Precio", "", "" };
         }
@@ -28,7 +28,7 @@ public final class Tipos {
         int n = etiquetas(t)[2].length() > 0 ? 3 : (etiquetas(t)[1].length() > 0 ? 2 : 1);
         for (int i = 0; i < n; i++) {
             double[] o = new double[1];
-            if (!Core.leer(txt[i], o)) { msg[0] = "Escribe solo numeros (decimales con coma, ej.: 2,5)."; return null; }
+            if (!Core.leer(txt[i], o)) { msg[0] = "Escribe sólo números (decimales con coma, ej.: 2,5)."; return null; }
             v[i] = o[0];
         }
         switch (t) {

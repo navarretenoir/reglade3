@@ -14,6 +14,6 @@
 #define APP_ALTO            780
 #define APP_COLOR_FONDO     RGB(0xF5, 0xF5, 0xF7)
 #define APP_ACERCA          L"Regla de 3 1.0 para Windows\n\nCalcula lo que no sabes a partir de lo que sí sabes, paso a paso.\n" \
-                            L"Desarrollada por Javiera Navarrete. Licencia GPL-3.0-or-later.\n\nFunciona sin internet."
+                            L"Licencia GPL-3.0-or-later.\n\nFunciona sin internet."
 static const WCHAR *APP_FUERA[] = {L"http://", L"https://github.com/", L"https://gitlab.com/", NULL};
 static const WCHAR *APP_PERMITIDOS[] = {NULL};

@@ -7,4 +7,3 @@ Qué puedes hacer:
   • Modo claro y modo oscuro.
   • Funciona sin internet y sin cuentas.
 
-Desarrollada por Javiera Navarrete.
