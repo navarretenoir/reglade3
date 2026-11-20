@@ -30,6 +30,11 @@ arbol() {   # arbol <stage> <prefijo> <binarios>: instalación común + metadato
   for t in 48 128 256; do
     mkdir -p "$st$pre/share/icons/hicolor/${t}x$t/apps"
     rsvg-convert -w $t -h $t "$APP/linux/$APP_ID.svg" -o "$st$pre/share/icons/hicolor/${t}x$t/apps/$APP_ID.png"
+    # 2026-11-14 (bug real, encontrado en Clima): rsvg-convert escribe con el umask del entorno
+    # de build (027 en este host) → PNG en 640, ilegible para quien no es root ("Failed to load
+    # icon ... Permiso denegado"). install -Dm644 de arriba/abajo no lo tiene porque fija el modo
+    # explícito; esto hace lo mismo acá.
+    chmod 644 "$st$pre/share/icons/hicolor/${t}x$t/apps/$APP_ID.png"
   done
   install -Dm644 "$APP/linux/LEEME.txt" "$st$pre/share/doc/$PAQUETE/LEEME.txt"
 }
